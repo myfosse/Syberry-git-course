@@ -14,7 +14,8 @@ import java.util.HashMap;
 @RequestMapping
 public class SignUp {
 
-  @Autowired UserService userService;
+  @Autowired
+  UserService userService;
 
   @PostMapping("auth/sign-up")
   public Object signUp(@RequestBody User user) {

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,17 +22,20 @@ public class UserServiceImpl implements UserService {
   private static final String EMAIL_PATTERN = "^[A-z0-9+_.-]+@[A-Za-z0-9.-]+$";
   private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,64}$";
 
-  @Autowired
-  UserRepository userRepository;
+  @Autowired UserRepository userRepository;
 
-  @Autowired
-  PasswordEncoder passwordEncoder;
+  @Autowired PasswordEncoder passwordEncoder;
 
   HashMap<String, String> errors = new HashMap<>();
 
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return new BCryptPasswordEncoder(8);
+  }
+
+  @Override
+  public Optional<User> findByUsername(String username) {
+    return userRepository.findByUsername(username);
   }
 
   @Override
@@ -48,11 +52,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void regNewUser(User user) {
-    User newUser = new User();
-    newUser.setUsername(user.getUsername());
-    newUser.setEmail(user.getEmail());
-    newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-    userRepository.save(newUser);
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    userRepository.save(user);
   }
 
   private void checkUsername(String username) {
