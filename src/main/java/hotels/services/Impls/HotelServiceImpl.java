@@ -15,17 +15,39 @@ public class HotelServiceImpl implements HotelService {
   private final HotelFileRepository hotelFileRepository;
   private final SavedHotelRepository savedHotelRepository;
   private final HotelRepository hotelRepository;
+  private final HotelCharacteristicRepository hotelCharacteristicRepository;
+  private final HotelCharacteristicGroupRepository hotelCharacteristicGroupRepository;
   private final static int itemsAmountPerPage = 10;
 
   @Autowired
   public HotelServiceImpl(PricingRepository pricingRepository,
                           HotelFileRepository hotelFileRepository,
                           SavedHotelRepository savedHotelRepository,
-                          HotelRepository hotelRepository) {
+                          HotelRepository hotelRepository,
+                          HotelCharacteristicRepository hotelCharacteristicRepository,
+                          HotelCharacteristicGroupRepository hotelCharacteristicGroupRepository) {
     this.pricingRepository = pricingRepository;
     this.hotelFileRepository = hotelFileRepository;
     this.savedHotelRepository = savedHotelRepository;
     this.hotelRepository = hotelRepository;
+    this.hotelCharacteristicRepository = hotelCharacteristicRepository;
+    this.hotelCharacteristicGroupRepository = hotelCharacteristicGroupRepository;
+  }
+
+  @Override
+  public HashMap<String, List<String>> getHotelCharacteristic(Hotel hotel) {
+    List<HotelCharacteristicGroup> groups = hotelCharacteristicGroupRepository.findAll();
+    HashMap<String, List<String>> characteristics = new HashMap<>();
+
+    for (HotelCharacteristicGroup group: groups) {
+      characteristics.put(group.getName(), hotelCharacteristicRepository.getValues(group.getId(), hotel.getId()));
+    }
+    return characteristics;
+  }
+
+  @Override
+  public HashMap<String, Object> getHotelInfo(Hotel hotel) {
+    return getItem(hotel);
   }
 
   @Override
@@ -61,16 +83,12 @@ public class HotelServiceImpl implements HotelService {
 
     item.put("id", hotel.getId());
     item.put("title", hotel.getTitle());
-    item.put("city", hotel.getLocation().getCity());
+    item.put("description", hotel.getDescription());
+    item.put("address", getLocationInfo(hotel.getLocation()));
     item.put("price", getTotalPrice(hotel));
-    item.put("photoUrl", getPhotoURL(hotel));
+    item.put("mainPhoto", getMainPhoto(hotel));
 
     return item;
-  }
-
-  private String getPhotoURL(Hotel hotel) {
-    Optional<HotelFile> hotelFile = hotelFileRepository.findMainByHotelId(hotel.getId());
-    return hotelFile.map(file -> file.getFiles().getExternalId()).orElse(null);
   }
 
   private Long getTotalPrice(Hotel hotel) {
@@ -91,4 +109,19 @@ public class HotelServiceImpl implements HotelService {
     pricingPlans.put("ONE_DAY", 1L);
     return pricingPlans;
   }
+
+  private HashMap<String, String> getLocationInfo(Location location) {
+    HashMap<String, String> address = new HashMap<>();
+    address.put("country", location.getCountry());
+    address.put("city", location.getCity());
+    address.put("address_line", location.getAddressLine());
+    address.put("zip", location.getZip());
+    return address;
+  }
+
+  private String getMainPhoto(Hotel hotel) {
+    Optional<HotelFile> hotelFile = hotelFileRepository.findMainByHotelId(hotel.getId());
+    return hotelFile.map(file -> file.getFiles().getExternalId()).orElse(null);
+  }
+
 }

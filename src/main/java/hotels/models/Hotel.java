@@ -16,6 +16,8 @@ public class Hotel {
   @Column(name = "owner_id")
   private Long ownerId;
 
+  private String description;
+
   @OneToOne
   @JoinColumn(name = "location_id", referencedColumnName = "id")
   private Location location;
@@ -28,6 +30,25 @@ public class Hotel {
 
   @OneToMany(mappedBy = "hotel")
   private Set<SavedHotel> savedHotels;
+
+  @OneToMany(mappedBy = "hotel")
+  private Set<HotelCharacteristic> hotelCharacteristics;
+
+  public Set<HotelCharacteristic> getHotelCharacteristics() {
+    return hotelCharacteristics;
+  }
+
+  public void setHotelCharacteristics(Set<HotelCharacteristic> hotelCharacteristics) {
+    this.hotelCharacteristics = hotelCharacteristics;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
   public Long getOwnerId() {
     return ownerId;

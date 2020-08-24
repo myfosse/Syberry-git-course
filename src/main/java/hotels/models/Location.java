@@ -14,11 +14,21 @@ public class Location {
 
   private String city;
 
+  private String zip;
+
   @Column(name = "address_line")
   private String addressLine;
 
   @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
   private Hotel hotel;
+
+  public String getZip() {
+    return zip;
+  }
+
+  public void setZip(String zip) {
+    this.zip = zip;
+  }
 
   public Hotel getHotel() {
     return hotel;
