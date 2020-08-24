@@ -11,7 +11,11 @@ public interface HotelService {
 
   List<HashMap<String, Object>> getOwnedItemsFromPage(int page, long id);
 
+  long getTotalItems();
+
   HashMap<String, Object> getHotelInfo(Hotel hotel);
 
   HashMap<String, List<String>> getHotelCharacteristic(Hotel hotel);
+
+  List<HashMap<String, Object>> getAllItemsFromPage(int page);
 }

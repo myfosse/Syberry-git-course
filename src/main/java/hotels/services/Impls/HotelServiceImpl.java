@@ -35,6 +35,11 @@ public class HotelServiceImpl implements HotelService {
   }
 
   @Override
+  public long getTotalItems() {
+    return hotelRepository.count();
+  }
+
+  @Override
   public HashMap<String, List<String>> getHotelCharacteristic(Hotel hotel) {
     List<HotelCharacteristicGroup> groups = hotelCharacteristicGroupRepository.findAll();
     HashMap<String, List<String>> characteristics = new HashMap<>();
@@ -60,6 +65,17 @@ public class HotelServiceImpl implements HotelService {
   public List<HashMap<String, Object>> getOwnedItemsFromPage(int page, long id) {
     List<Hotel> ownedHotels = hotelRepository.findByOwnerId(id);
     return mapToOwnedResponse(ownedHotels, page);
+  }
+
+  @Override
+  public List<HashMap<String, Object>> getAllItemsFromPage(int page) {
+    List<Hotel> hotels = hotelRepository.findAll();
+    long hotelsAmount = hotelRepository.count();
+    List<HashMap<String, Object>> items = new ArrayList<>();
+    for (int i = itemsAmountPerPage * (page - 1); i < page * itemsAmountPerPage && i < hotelsAmount; i++) {
+      items.add(getItem(hotels.get(i)));
+    }
+    return items;
   }
 
   private List<HashMap<String, Object>> mapToOwnedResponse(List<Hotel> ownedHotels, int page) {
