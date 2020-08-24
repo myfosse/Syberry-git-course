@@ -12,6 +12,9 @@ services:
       - DB_USER_PASSWORD=${DB_USER_PASSWORD}
       - DB_DATABASE_NAME=${DB_DATABASE_NAME}
       - DB_PORT=${DB_PORT}
+      - SECRET=${SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - REFRESH_TOKEN_EXPIRATION=${REFRESH_TOKEN_EXPIRATION}
     depends_on:
       - mysql
     networks:
