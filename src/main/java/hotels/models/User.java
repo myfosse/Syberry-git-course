@@ -1,25 +1,39 @@
 package hotels.models;
 
-import com.sun.istack.NotNull;
-
+import org.springframework.beans.factory.annotation.Value;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @NotNull
   private String username;
 
-  @NotNull
   private String email;
 
-  @NotNull
   private String password;
+
+  @Value("${some.key:false}")
+  private boolean rememberMe;
+
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+  private Auth auth;
+
+  public boolean getRememberMe() {
+    return rememberMe;
+  }
+
+  public void setRememberMe(boolean rememberMe) {
+    this.rememberMe = rememberMe;
+  }
+
+  public Long getId() {
+    return id;
+  }
 
   public String getUsername() {
     return username;
