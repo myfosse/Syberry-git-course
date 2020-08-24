@@ -10,7 +10,6 @@ import java.util.*;
 
 @Service
 public class HotelServiceImpl implements HotelService {
-
   private final PricingRepository pricingRepository;
   private final HotelFileRepository hotelFileRepository;
   private final SavedHotelRepository savedHotelRepository;
