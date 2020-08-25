@@ -1,0 +1,6 @@
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE_NAME=hotels_db
+DB_USER_NAME=hotels_db_user
+DB_USER_PASSWORD=hotels_db_pass
+DB_ROOT_PASSWORD=root
