@@ -74,17 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<!-- localhost environment -->
-		<profile>
-			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<password>Sasha2986682</password>
-				<username>alex</username>
-			</properties>
-		</profile>
-	</profiles>
 </project>
