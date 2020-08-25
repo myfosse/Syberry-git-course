@@ -4,6 +4,6 @@ VOLUME /tmp
 
 COPY target/*.jar app.jar
 
-ENTRYPOINT ["/wait-for-it.sh", "mysql:3306", "--", "java", "-jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
 
 CMD ["-Dserver.port=80","/app.jar"]
