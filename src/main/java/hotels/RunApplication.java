@@ -18,7 +18,8 @@ public class RunApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**");
+				registry.addMapping("/**")
+				    .allowedOrigins("https://dev-sa-hotels.jarvis.syberry.net", "https://qa-sa-hotels.jarvis.syberry.net");
 			}
 		};
 	}

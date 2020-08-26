@@ -19,7 +19,7 @@ $ git clone git@git.syberry.com:syberry-internship/hotels-backend.git
 3. Build a package (this step will be deleted after full Docker integration)
 
 ```
-$ mvnw package
+$ mvn package -Dmaven.test.skip=true
 ```
 
 4. Run the `docker-compose up` from the root:
