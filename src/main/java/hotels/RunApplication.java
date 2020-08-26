@@ -19,7 +19,7 @@ public class RunApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-				    .allowedOrigins("https://dev-sa-hotels.jarvis.syberry.net", "https://qa-sa-hotels.jarvis.syberry.net");
+				    .allowedOrigins("*", "https://dev-sa-hotels.jarvis.syberry.net", "https://qa-sa-hotels.jarvis.syberry.net", "http://localhost");
 			}
 		};
 	}
