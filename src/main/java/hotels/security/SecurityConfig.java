@@ -18,9 +18,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired CustomUserDetailsService customUserDetailsService;
+  @Autowired
+  CustomUserDetailsService customUserDetailsService;
 
-  @Autowired private JwtAuthenticationEntryPoint unauthorizedHandler;
+  @Autowired
+  JwtAuthenticationEntryPoint unauthorizedHandler;
 
   @Bean
   public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -29,10 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
-      throws Exception {
+          throws Exception {
     authenticationManagerBuilder
-        .userDetailsService(customUserDetailsService)
-        .passwordEncoder(passwordEncoder());
+            .userDetailsService(customUserDetailsService)
+            .passwordEncoder(passwordEncoder());
   }
 
   @Bean(BeanIds.AUTHENTICATION_MANAGER)
@@ -48,19 +50,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf()
-        .disable()
-        .exceptionHandling()
-        .authenticationEntryPoint(unauthorizedHandler)
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .authorizeRequests()
-        .antMatchers("/auth/**")
-        .permitAll()
-        .anyRequest()
-        .authenticated();
+    http
+            .cors()
+            .and()
+            .csrf()
+            .disable()
+            .exceptionHandling()
+            .authenticationEntryPoint(unauthorizedHandler)
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeRequests()
+            .antMatchers("/auth/**", "/")
+            .permitAll()
+            .anyRequest()
+            .authenticated();
 
     http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }

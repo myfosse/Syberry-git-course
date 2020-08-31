@@ -1,0 +1,17 @@
+create table files (id bigint not null, external_id varchar(255), primary key (id)) engine=InnoDB;
+insert into hibernate_sequence values ( 1 );
+insert into hibernate_sequence values ( 1 );
+insert into hibernate_sequence values ( 1 );
+insert into hibernate_sequence values ( 1 );
+insert into hibernate_sequence values ( 1 );
+insert into hibernate_sequence values ( 1 );
+create table hotel_file (id bigint not null, is_main bit, file_id bigint, hotel_id bigint, primary key (id)) engine=InnoDB;
+create table hotel_price (id bigint not null, price bigint not null, pricing_plan_id bigint, hotel_id bigint, primary key (id)) engine=InnoDB;
+create table hotels (id bigint not null, title varchar(255), location_id bigint, primary key (id)) engine=InnoDB;
+create table locations (id bigint not null, address_line varchar(255), city varchar(255), country varchar(255), primary key (id)) engine=InnoDB;
+create table pricing (id bigint not null, type varchar(255), primary key (id)) engine=InnoDB;
+alter table hotel_file add constraint FK7trvm3vfk8x8q7082qxgvej38 foreign key (file_id) references files (id);
+alter table hotel_file add constraint FKt3n6yeew9iwn2f0g3vf1dhyvj foreign key (hotel_id) references hotels (id);
+alter table hotel_price add constraint FKglouk5gmvi32kj3wd8v9x689d foreign key (hotel_id) references hotels (id);
+alter table hotel_price add constraint FKf6ko821chfr318c98whkqv07j foreign key (pricing_plan_id) references pricing (id);
+alter table hotels add constraint FKqs8u4n6x2f5anae9lllt3857p foreign key (location_id) references locations (id);
