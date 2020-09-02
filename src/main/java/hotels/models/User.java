@@ -1,6 +1,5 @@
 package hotels.models;
 
-import org.springframework.beans.factory.annotation.Value;
 import javax.persistence.*;
 
 @Entity
@@ -17,19 +16,8 @@ public class User {
 
   private String password;
 
-  @Value("${some.key:false}")
-  private boolean rememberMe;
-
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Auth auth;
-
-  public boolean getRememberMe() {
-    return rememberMe;
-  }
-
-  public void setRememberMe(boolean rememberMe) {
-    this.rememberMe = rememberMe;
-  }
 
   public Long getId() {
     return id;

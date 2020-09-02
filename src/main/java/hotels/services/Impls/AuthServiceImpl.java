@@ -61,6 +61,7 @@ public class AuthServiceImpl implements AuthService {
 
   private void loginUser(LoginRequest request, String token) {
     String email = request.getEmail();
+    boolean rememberMe = request.getRememberMe();
 
     User user = userRepository.findByEmail(email).get();
     Optional<Auth> authOptional = authRepository.findByUserId(user.getId());
@@ -68,6 +69,7 @@ public class AuthServiceImpl implements AuthService {
     if (authOptional.isPresent()) {
       Auth auth = authOptional.get();
       auth.setRefreshToken(token);
+      auth.setRememberMe(rememberMe);
       authRepository.save(auth);
     } else {
       Auth newAuth = new Auth();
