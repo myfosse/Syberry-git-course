@@ -35,8 +35,8 @@ public class HotelServiceImpl implements HotelService {
   }
 
   @Override
-  public List<HashMap<String, Object>> getOwnedItemsFromPage(int page, long owner_id) {
-    List<Hotel> ownedHotels = hotelRepository.findByOwnerId(owner_id);
+  public List<HashMap<String, Object>> getOwnedItemsFromPage(int page, long id) {
+    List<Hotel> ownedHotels = hotelRepository.findByOwnerId(id);
     return mapToOwnedResponse(ownedHotels, page);
   }
 
