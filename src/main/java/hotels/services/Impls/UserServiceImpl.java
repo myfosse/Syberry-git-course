@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
   private static final String USERNAME_PATTERN = "^[A-z .,-_]{1,60}$";
   private static final String EMAIL_PATTERN = "^[A-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-  private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,64}$";
+  private static final String PASSWORD_PATTERN = "^(?=.*\\d{1,})(?=.*[a-z]{1,})(?=.*[A-Z]{1,})(?=.*[#?!@$%^&*-]{1,}).{8,64}$";
 
   @Autowired UserRepository userRepository;
 
