@@ -16,6 +16,8 @@ public class User {
 
   private String password;
 
+  private String codeword;
+
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Auth auth;
   
@@ -49,5 +51,21 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getCodeword() {
+    return codeword;
+  }
+
+  public void setCodeword(String codeword) {
+    this.codeword = codeword;
+  }
+
+  public Auth getAuth() {
+    return auth;
+  }
+
+  public void setAuth(Auth auth) {
+    this.auth = auth;
   }
 }
