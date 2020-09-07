@@ -9,6 +9,8 @@ public class SignUpRequest {
 
   @NotNull private String password;
 
+  @NotNull private String codeword;
+
   public String getUsername() {
     return username;
   }
@@ -31,5 +33,13 @@ public class SignUpRequest {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getCodeword() {
+    return codeword;
+  }
+
+  public void setCodeword(String codeword) {
+    this.codeword = codeword;
   }
 }

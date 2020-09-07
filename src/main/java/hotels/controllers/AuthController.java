@@ -2,6 +2,7 @@ package hotels.controllers;
 
 import hotels.models.User;
 import hotels.payloads.LoginRequest;
+import hotels.payloads.ResetRequest;
 import hotels.services.AuthService;
 import hotels.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +11,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping
-public class SignUpController {
+@RequestMapping("/auth")
+public class AuthController {
+
+  private final AuthService authService;
+  private final UserService userService;
 
   @Autowired
-  UserService userService;
+  public AuthController(AuthService authService, UserService userService) {
+    this.authService = authService;
+    this.userService = userService;
+  }
 
-  @Autowired
-  AuthService authService;
+  @PostMapping("/sign-in")
+  public HashMap<String, String> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    return authService.authenticateUser(loginRequest);
+  }
 
-  @PostMapping("auth/sign-up")
+  @PostMapping("/sign-up")
   public HashMap<String, String> signUp(@RequestBody User user) {
     userService.checkFields(user);
     String notEncodedPassword = user.getPassword();
@@ -30,6 +40,12 @@ public class SignUpController {
     LoginRequest request = userToLoginRequest(user, notEncodedPassword);
 
     return authService.authenticateUser(request);
+  }
+
+  @PostMapping("/password-reset")
+  public void passwordReset(@RequestBody ResetRequest resetRequest,
+                            HttpServletResponse response) {
+    userService.resetPassword(resetRequest, response);
   }
 
   private LoginRequest userToLoginRequest(User user, String password) {
