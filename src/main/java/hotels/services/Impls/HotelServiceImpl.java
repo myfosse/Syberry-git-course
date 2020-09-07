@@ -114,7 +114,7 @@ public class HotelServiceImpl implements HotelService {
     HashMap<String, String> address = new HashMap<>();
     address.put("country", location.getCountry());
     address.put("city", location.getCity());
-    address.put("address_line", location.getAddressLine());
+    address.put("address_line_1", location.getAddressLine());
     address.put("zip", location.getZip());
     return address;
   }
