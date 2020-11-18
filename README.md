@@ -1,31 +1,48 @@
-# Hotels Project Backend API
+# Git course project
 
-You should have Java 11, Maven locally installed (will be moved to Docker later).
+Welcome to the Git course!
 
-How to install:
+Before you start you need to:
+- Familiarize with:
+  - Documentation
 
-1. Clone the repo:
+    https://git-scm.com/book/en/v2 - Must read
 
-```bash
-$ git clone git@git.syberry.com:syberry-internship/hotels-backend.git
-```
+    https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell - Very important chapter
 
-2. Add `sa-hotels.loc` to `hosts`:
+    https://gitimmersion.com
 
-```
-127.0.0.1 sa-hotels.loc
-```
+    https://githowto.com
 
-3. Build a package (this step will be deleted after full Docker integration)
+  - GUI Clients
 
-```
-$ mvn package -Dmaven.test.skip=true
-```
+    https://git-scm.com/downloads/guis
 
-4. Run the `docker-compose up` from the root:
+  - Commit style guide
 
-```
-$ docker-compose up
-```
+    https://git.syberry.com/syberry-policies/production-process/-/blob/master/engineering/version-control/commit-style-guide.md
 
-5. Open http://sa-hotels.loc in browser. Enjoy
+- Fork this project to your namespace
+- Add the reviewer to your project with `Developer` permission (ask the manager about the reviewer)
+
+
+### Definition of done
+
+- Commits comply with [style guide](https://git.syberry.com/syberry-policies/production-process/-/blob/master/engineering/version-control/commit-style-guide.md)
+- All completed tasks pushed to your own project
+- Your branch is rebased onto `dev` branch (each task has its own `dev` branch like `git-course_[N]_dev`)
+- Git merge request is created (in each task to its own `dev` branch)
+- You MUST NOT do anything with `dev` branches
+
+
+### Tasks
+
+So, clone your repo and let's start:
+
+- [Task 1 - Squash, cherry pick, resolve conflicts](docs/tasks/task1.md)
+- [Task 2 - Split, rebased, resolve conflicts](docs/tasks/task2.md)
+- [Task 3 - Change a commit message](docs/tasks/task3.md)
+- [Task 4 - Delete a commit, rebased, resolve conflicts](docs/tasks/task4.md)
+- [Task 5 - Split, rebased](docs/tasks/task5.md)
+- [Task 6 - Recover lost commits after removing a branch](docs/tasks/task6.md)
+- [Task 7 - Cherry pick](docs/tasks/task7.md)
