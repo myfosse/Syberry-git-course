@@ -46,3 +46,6 @@ So, clone your repo and let's start:
 - [Task 5 - Split, rebased](docs/tasks/task5.md)
 - [Task 6 - Recover lost commits after removing a branch](docs/tasks/task6.md)
 - [Task 7 - Cherry pick](docs/tasks/task7.md)
+- [Task 8 - Split, rebased](docs/tasks/task8.md)
+- [Task 9 - Change commits](docs/tasks/task9.md)
+- [Task 10 - Change commits](docs/tasks/task10.md)
