@@ -1,6 +1,6 @@
 # Hotels Project Backend API
 
-You should have Java 14, Maven locally installed (will be moved to Docker later).
+You should have Java 11, Maven locally installed (will be moved to Docker later).
 
 How to install:
 
